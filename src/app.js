@@ -1,14 +1,14 @@
 const express = require('express');
 const session = require('express-session');
 const path = require('path');
-const authController = require('./controllers/authController');
+const authRoutes = require('./routes/authRoutes');
 
 const app = express();
 const port = 3000;
 
-// Cấu hình EJS
-app.set('view engine', 'ejs');
+// Cấu hình views
 app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs');
 
 // app.use(express.static(path.join(__dirname, 'src', 'public')));
 
@@ -22,7 +22,11 @@ app.use(session({
     saveUninitialized: true,
 }));
 
-app.use('/', authController);
+app.use('/auth', authRoutes);
+
+app.get('/', (req, res) => {
+    res.render('home');
+});
 
 app.listen(port, () => {
     console.log(`Server is running on http://localhost:${port}`);

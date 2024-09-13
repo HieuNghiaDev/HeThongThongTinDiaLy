@@ -1,19 +1,23 @@
 const db = require('../db/connecdb');
 
-// Hàm kiểm tra thông tin đăng nhập
-const authenticateUser = (username, password, callback) => {
-    const user = 'SELECT * FROM user WHERE username = ? AND password = ?';
-    db.query(user, [username, password], (err, results) => {
-        if (err) {
-            callback(err, null);
-            return;
-        }
-        if (results.length > 0) {
-            callback(null, results[0]);
-        } else {
-            callback(null, null);
-        }
-    });
+exports.authenticateUser = async (username, password) => {
+    const query = 'SELECT * FROM users WHERE username = ? AND password = ?';
+    try {
+        const [results] = await db.execute(query, [username, password]);
+        return results.length > 0 ? results[0] : null;
+    } catch (error) {
+        console.error('Lỗi xác thực người dùng:', error);
+        throw error;
+    }
 };
 
-module.exports = { authenticateUser };
+exports.createUser = async (username, password, email) => {
+    const query = 'INSERT INTO users (username, password, email) VALUES (?, ?, ?)';
+    try {
+        const [result] = await db.execute(query, [username, password, email]);
+        return result.insertId;
+    } catch (error) {
+        console.error('Lỗi tạo người dùng mới:', error);
+        throw error;
+    }
+};

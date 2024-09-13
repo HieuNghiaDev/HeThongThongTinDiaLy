@@ -24,9 +24,9 @@
     <h1>Chào mừng đến với Hệ thống Thông tin Địa lý</h1>
     <% if (locals.user) { %>
         <p>Xin chào, <%= user.username %>!</p>
-        <a href="/auth/logout">Đăng xuất</a>
+        <a href="/logout">Đăng xuất</a>
     <% } else { %>
-        <a href="/auth/login">Đăng nhập</a>
+        <a href="/login">Đăng nhập</a>
     <% } %>
 
     <div class="input-button-value">

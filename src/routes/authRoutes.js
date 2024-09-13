@@ -5,7 +5,7 @@ const authController = require('../controllers/authController');
 // Thêm route GET cho trang đăng nhập
 router.get('/login', authController.getLogin);
 router.post('/login', authController.postLogin);
-
-// Các route khác...
+router.get('/', authController.getHome);
+router.get('/logout', authController.logout);
 
 module.exports = router;

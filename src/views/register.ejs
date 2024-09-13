@@ -1,19 +1,18 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Đăng ký</title>
+    <title>Đăng nhập</title>
 </head>
 <body>
-    <h1>Đăng ký</h1>
+    <h1>Đăng nhập</h1>
     <% if (locals.error) { %>
         <p style="color: red;"><%= error %></p>
     <% } %>
-    <form action="/auth/register" method="POST">
+    <form action="/login" method="POST">
         <input type="text" name="username" placeholder="Tên đăng nhập" required><br>
         <input type="password" name="password" placeholder="Mật khẩu" required><br>
-        <input type="email" name="email" placeholder="Email" required><br>
-        <button type="submit">Đăng ký</button>
+        <button type="submit">Đăng Ký</button>
     </form>
-    <a href="/auth/login">Đăng nhập</a>
+    <a href="/login">Đăng Nhập</a>
 </body>
 </html>

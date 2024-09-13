@@ -5,8 +5,8 @@ exports.getLogin = (req, res) => {
 };
 
 exports.postLogin = async (req, res) => {
-    const { username, password } = req.body;
     try {
+        const { username, password } = req.body;
         console.log('Attempting login for:', username);
         const user = await userModel.authenticateUser(username, password);
         if (user) {
@@ -19,7 +19,7 @@ exports.postLogin = async (req, res) => {
         }
     } catch (error) {
         console.error('Lỗi đăng nhập:', error);
-        res.status(500).render('error', { message: 'Lỗi server khi đăng nhập' });
+        res.status(500).json({ error: 'Đã xảy ra lỗi khi đăng nhập' });
     }
 };
 

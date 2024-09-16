@@ -9,25 +9,25 @@ body {
     height: 100vh;
 }
 
-.login-container {
+.auth-container {
     width: 100%;
     max-width: 400px;
 }
 
-.login-box {
+.auth-box {
     background-color: white;
     padding: 40px;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.login-title {
+.auth-title {
     text-align: center;
     color: #1877f2;
     margin-bottom: 20px;
 }
 
-.login-form {
+.auth-form {
     display: flex;
     flex-direction: column;
 }
@@ -50,7 +50,7 @@ body {
     font-size: 16px;
 }
 
-.login-button {
+.auth-button {
     background-color: #1877f2;
     color: white;
     border: none;
@@ -62,16 +62,16 @@ body {
     transition: background-color 0.3s;
 }
 
-.login-button:hover {
+.auth-button:hover {
     background-color: #166fe5;
 }
 
-.register {
+.switch-auth {
     text-align: center;
     margin-top: 20px;
 }
 
-.register a {
+.switch-auth a {
     color: #1877f2;
     text-decoration: none;
 }

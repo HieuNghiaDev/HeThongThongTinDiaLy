@@ -13,7 +13,7 @@ exports.authenticateUser = async (username, password) => {
 };
 
 exports.createUser = async (username, password, email) => {
-    const query = 'INSERT INTO user (username, password, email) VALUES (?, ?, ?)';
+    const query = 'INSERT INTO user (username, password) VALUES (?, ?)';
     try {
         const [result] = await db.execute(query, [username, password, email]);
         return result.insertId;

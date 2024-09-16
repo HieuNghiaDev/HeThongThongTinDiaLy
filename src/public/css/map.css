@@ -1,4 +1,4 @@
-body {
+/* body {
     font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
     font-size: small;
     background: #fff;
@@ -8,4 +8,95 @@ body {
     width: 100%;
     height: 500px;
     border: 1px solid #000;
+} */
+
+.main-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #f0f8ff;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    width: 50px;
+    height: auto;
+}
+
+.site-title {
+    font-size: 1.5em;
+    color: #333;
+    margin: 0;
+    flex-grow: 1;
+    text-align: center;
+}
+
+.user-avatar {
+    position: relative;
+}
+
+.avatar-container {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.avatar-img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.user-menu {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 100%;
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    flex-direction: column;
+    align-items: flex-start;
+    min-width: 150px;
+}
+
+.avatar-container:hover .user-menu {
+    display: flex;
+}
+
+.user-name {
+    color: #333;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.logout-button {
+    text-decoration: none;
+    color: #ff4444;
+    font-weight: bold;
+    padding: 5px 10px;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+.logout-button:hover {
+    background-color: #ffeeee;
+}
+
+.login-link {
+    text-decoration: none;
+    color: #4CAF50;
+    font-weight: bold;
+}
+
+.login-link:hover {
+    text-decoration: underline;
 }

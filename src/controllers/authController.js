@@ -10,7 +10,7 @@ exports.postLogin = async (req, res) => {
         const user = await userModel.authenticateUser(username, password);
         if (user) {
             req.session.user = user;
-            res.redirect('/'); // Chuyển hướng đến trang dashboard sau khi đăng nhập thành công
+            res.redirect('/'); // Chuyển hướng đến trang chủ sau khi đăng nhập thành công
         } else {
             res.render('login', { error: 'Tên đăng nhập hoặc mật khẩu không đúng' });
         }

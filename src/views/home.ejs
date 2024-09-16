@@ -10,25 +10,26 @@
     <title>Home</title>
 </head>
 <body>
-    <header class="header">
-        <nav class="navbar text-bg-secondary">
-            <div class="container-fluid">
-              <a class="navbar-brand">HỆ THỐNG THÔNG TIN ĐỊA LÝ</a>
-              <form class="d-flex" role="search">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success" type="submit">Search</button>
-              </form>
-            </div>
-          </nav>
+    <header class="main-header">
+      <div class="logo-container">
+          <img src="https://media.vneconomy.vn/w800/images/upload/2021/04/20/congthongtin0-1578625753620958979633-crop-157862575630212410965.jpg" alt="Logo" class="logo">
+      </div>
+      <h1 class="site-title">Hệ thống thông tin địa lý</h1>
+      <div class="user-avatar">
+          <% if (locals.user) { %>
+              <div class="avatar-container">
+                  <img src="<%= user.avatarUrl || 'https://i.pinimg.com/564x/b4/4c/34/b44c34ca3ca2f8e1b5a77bbfb56b640a.jpg' %>" alt="User Avatar" class="avatar-img">
+                  <div class="user-menu">
+                      <span class="user-name"><%= user.username %></span>
+                      <a href="/logout" class="logout-button">Đăng xuất</a>
+                  </div>
+              </div>
+          <% } else { %>
+              <a href="/login" class="login-link">Đăng nhập</a>
+          <% } %>
+      </div>
     </header>
-    <h1>Chào mừng đến với Hệ thống Thông tin Địa lý</h1>
-    <% if (locals.user) { %>
-        <p>Xin chào, <%= user.username %>!</p>
-        <a href="/logout">Đăng xuất</a>
-    <% } else { %>
-        <a href="/login">Đăng nhập</a>
-    <% } %>
-
+  
     <div class="input-button-value">
       <input type="button" id="getValues" value="getValues">
       <input type="button" id="changeValues" value="changeValues">

@@ -4,10 +4,11 @@ exports.getLogin = (req, res) => {
     res.render('login', { error: null });
 };
 
+// Đăng nhập
 exports.postLogin = async (req, res) => {
     const { username, password } = req.body;
     try {
-        const user = await userModel.authenticateUser(username, password);
+        const user = await userModel.authenticateUser(username, password); // Kiểm tra thông tin đăng nhập
         if (user) {
             req.session.user = user;
             res.redirect('/'); // Chuyển hướng đến trang chủ sau khi đăng nhập thành công
@@ -20,6 +21,7 @@ exports.postLogin = async (req, res) => {
     }
 };
 
+// Trang chủ
 exports.getHome = (req, res) => {
     if (req.session.user) {
         res.render('home', { user: req.session.user });
@@ -28,6 +30,7 @@ exports.getHome = (req, res) => {
     }
 };
 
+// Đăng xuất
 exports.logout = (req, res) => {
     req.session.destroy((err) => {
         if (err) {
@@ -37,21 +40,28 @@ exports.logout = (req, res) => {
     });
 };
 
+// Đăng ký
 exports.getRegister = (req, res) => {
     res.render('register');
 };
 
-exports.postRegister = async (req, res) => {
-    const { username, password, email } = req.body;
+// Xử lý đăng ký
+exports.postRegister = async (req, res) => { 
+    const { username, password, repassword } = req.body; // Lấy dữ liệu từ form
+
+    if (password !== repassword) {
+        return res.render('register', { error: 'Mật khẩu và mật khẩu nhập lại không khớp' });
+    }
+
     try {
-        const newUser = await userModel.createUser(username, password, email);
+        const newUser = await userModel.createUser(username, password, repassword); // Tạo người dùng mới
         if (newUser) {
             res.redirect('/login');
         } else {
-            res.render('register', { error: 'Không thể đăng ký. Vui lòng thử lại.' });
+            res.render('register', { error: 'Không thể đăng ký. Vui lòng thử lại.' }); // Hiển thị thông báo lỗi
         }
     } catch (error) {
-        console.error('Lỗi đăng ký:', error);
+        console.error('Lỗi đăng ký:', error); 
         res.status(500).render('error', { message: 'Lỗi server khi đăng ký' });
     }
 };

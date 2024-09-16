@@ -21,7 +21,6 @@ app.use(session({
 // Sử dụng routes
 app.use('/', authRoutes);
 
-// Route cho trang chủ (nếu cần)
 app.get('/', (req, res) => {
     res.render('home');
 });

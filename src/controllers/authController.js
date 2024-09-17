@@ -47,14 +47,14 @@ exports.getRegister = (req, res) => {
 
 // Xử lý đăng ký
 exports.postRegister = async (req, res) => { 
-    const { username, password, repassword } = req.body; // Lấy dữ liệu từ form
+    const { username, password,fullname, email, repassword } = req.body; // Lấy dữ liệu từ form
 
     if (password !== repassword) {
         return res.render('register', { error: 'Mật khẩu và mật khẩu nhập lại không khớp' });
     }
 
     try {
-        const newUser = await userModel.createUser(username, password, repassword); // Tạo người dùng mới
+        const newUser = await userModel.createUser(username, password,fullname, email); // Tạo người dùng mới
         if (newUser) {
             res.redirect('/login');
         } else {

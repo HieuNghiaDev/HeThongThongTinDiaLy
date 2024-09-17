@@ -2,7 +2,7 @@ const express = require('express');
 const session = require('express-session');
 const path = require('path');
 const authRoutes = require('./routes/authRoutes');
-const storeRoutes = require('./routes/storeRoutes');
+const storeRoutes = require('./routes/homeRoutes');
 
 const app = express();
 

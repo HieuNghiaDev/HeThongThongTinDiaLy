@@ -3,8 +3,8 @@
   
       // Creating a MapOptions object with the required properties
       var options = {
-        zoom: 10,
-        center: new google.maps.LatLng(9.9549729,105.121318),
+        zoom: 12,
+        center: new google.maps.LatLng(9.944620952122317, 105.14710569278715),
         mapTypeId: google.maps.MapTypeId.ROADMAP
       };
       
@@ -29,27 +29,34 @@
         });
       }
 
-      fetch('/')
-            .then(response => response.json())
-            .then(stores => {
-                console.log('Dữ liệu cửa hàng:', stores);
-                stores.forEach(store => {
-                    // Adding a marker to the map
-                    var marker = new google.maps.Marker({
-                      position: new google.maps.LatLng(store.LatLng, store.longitude),
-                      map: map,
-                      title: 'Click me'
-                    });
-                    const infowindow = new google.maps.InfoWindow({
-                        content: `<h3>${store.name}</h3>`
-                    });
+      google.maps.event.addListenerOnce(map, 'idle', function() {
+          // Lấy dữ liệu cửa hàng từ server
+          fetch('/stores/map-data')
+              .then(response => response.json())
+              .then(stores => {
+                  console.log('Dữ liệu cửa hàng:', stores);
+                  // Tiếp tục xử lý...
+                  stores.forEach(store => {
+                      console.log('Tạo marker cho:', store.name_store, 'tại:', store.latitude, store.longitude);
+                      const marker = new google.maps.Marker({
+                          position: new google.maps.LatLng(store.latitude, store.longitude),
+                          map: map,
+                          title: store.name_store
+                      });
 
-                    marker.addListener('click', function() {
-                        infowindow.open(map, marker);
-                    });
-                });
-            })
-            .catch(error => console.error('Lỗi khi lấy dữ liệu cửa hàng:', error));
+                      // Tạo infowindow cho mỗi marker
+                      const infowindow = new google.maps.InfoWindow({
+                          content: `<h3>${store.name_store}</h3><p>Địa chỉ: ${store.address}</p>`
+                      });
+
+                      // Thêm sự kiện click cho marker
+                      marker.addListener('click', function() {
+                          infowindow.open(map, marker);
+                      });
+                  });
+              })
+              .catch(error => console.error('Lỗi khi lấy dữ liệu cửa hàng:', error));
+      });
       
       // // Creating a LatLngBounds object
       // var bounds = new google.maps.LatLngBounds();

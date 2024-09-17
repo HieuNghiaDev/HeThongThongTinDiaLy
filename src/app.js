@@ -2,6 +2,7 @@ const express = require('express');
 const session = require('express-session');
 const path = require('path');
 const authRoutes = require('./routes/authRoutes');
+const storeRoutes = require('./routes/storeRoutes');
 
 const app = express();
 
@@ -19,11 +20,15 @@ app.use(session({
 }));
 
 // Sử dụng routes
-app.use('/', authRoutes);
+// app.use('/', authRoutes);
 
-app.get('/', (req, res) => {
-    res.render('home');
-});
+// Sử dụng routes
+app.use(authRoutes);
+app.use(storeRoutes);
+
+// app.get('/', (req, res) => {
+//     res.render('home');
+// });
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {

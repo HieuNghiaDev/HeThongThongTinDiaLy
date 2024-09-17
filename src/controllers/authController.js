@@ -65,3 +65,4 @@ exports.postRegister = async (req, res) => {
         res.status(500).render('error', { message: 'Lỗi server khi đăng ký' });
     }
 };
+

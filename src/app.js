@@ -2,7 +2,6 @@ const express = require('express');
 const session = require('express-session');
 const path = require('path');
 const authRoutes = require('./routes/authRoutes');
-const storeRoutes = require('./routes/homeRoutes');
 
 const app = express();
 
@@ -24,7 +23,6 @@ app.use(session({
 
 // Sử dụng routes
 app.use(authRoutes);
-app.use(storeRoutes);
 
 // app.get('/', (req, res) => {
 //     res.render('home');

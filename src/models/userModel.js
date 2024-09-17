@@ -14,10 +14,15 @@ exports.authenticateUser = async (username, password) => {
 };
 
 // Tạo người dùng mới
-exports.createUser = async (username, password) => {
-    const query = 'INSERT INTO user (username, password) VALUES (?, ?)';
+exports.createUser = async (username, password, fullname, email) => {
+    if (!username || !password || !fullname || !email) {
+        throw new Error('Tất cả các trường là bắt buộc');
+    }
+
+    const query = 'INSERT INTO user (username, password, fullname, email) VALUES (?, ?, ?, ?)';
     try {
-        const [result] = await db.execute(query, [username, password]);
+        const [result] = await db.execute(query, [username, password, fullname, email]);
+        console.log('Người dùng mới đã được tạo:', result.insertId);
         return result.insertId;
     } catch (error) {
         console.error('Lỗi tạo người dùng mới:', error);

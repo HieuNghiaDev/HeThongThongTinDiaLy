@@ -10,16 +10,24 @@
             <h1 class="auth-title">Đăng ký</h1>
             <form action="/register" method="POST" class="auth-form">
                 <div class="form-group">
+                    <label for="fullname" class="form-label">Họ và tên</label>
+                    <input type="text" id="fullname" name="fullname" class="form-input" required>
+                </div>
+                <div class="form-group">
                     <label for="username" class="form-label">Tên đăng nhập</label>
                     <input type="text" id="username" name="username" class="form-input" required>
                 </div>
                 <div class="form-group">
-                    <label for="password" class="form-label">Mật khẩu</label>
-                    <input type="password" id="repassword" name="repassword" class="form-input" required>
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" id="email" name="email" class="form-input" required>
                 </div>
                 <div class="form-group">
-                    <label for="password" class="form-label">Nhập lại mật khẩu</label>
+                    <label for="password" class="form-label">Mật khẩu</label>
                     <input type="password" id="password" name="password" class="form-input" required>
+                </div>
+                <div class="form-group">
+                    <label for="repassword" class="form-label">Nhập lại mật khẩu</label>
+                    <input type="password" id="repassword" name="repassword" class="form-input" required>
                 </div>
                 <button type="submit" class="auth-button">Đăng ký</button>
             </form>
@@ -31,5 +39,23 @@
             <% } %>
         </div>
     </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.querySelector('.auth-form');
+            const emailInput = document.getElementById('email');
+        
+            form.addEventListener('submit', function(event) {
+                if (!isValidEmail(emailInput.value)) {
+                    event.preventDefault();
+                    alert('Vui lòng nhập một địa chỉ email hợp lệ.');
+                }
+            });
+        
+            function isValidEmail(email) {
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                return emailRegex.test(email);
+            }
+        });
+    </script>
 </body>
 </html>

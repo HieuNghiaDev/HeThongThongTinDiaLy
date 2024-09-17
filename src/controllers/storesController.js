@@ -11,19 +11,14 @@ exports.getAllStores = async (req, res) => {
     }
 };
 
-// Lấy cửa hàng để hiển thị trên bản đồ
+//lấy dữ liệu cho bản đồ
 exports.getStoresForMap = async (req, res) => {
     try {
-        const stores = await storesModel.getAllStores();
-        const mapData = stores.map(store => ({
-            name: store.name,
-            lat: store.latitude,
-            lng: store.longitude
-        }));
-        res.json(mapData);
+        const stores = await storeModel.getStoresForMap();
+        res.json(stores); // Gửi dữ liệu dưới dạng JSON về client
     } catch (error) {
-        console.error('Lỗi khi lấy dữ liệu cửa hàng cho bản đồ:', error);
-        res.status(500).json({ error: 'Đã xảy ra lỗi khi lấy dữ liệu cửa hàng cho bản đồ' });
+        console.error('Lỗi khi lấy dữ liệu cửa hàng:', error);
+        res.status(500).json({ error: 'Đã xảy ra lỗi khi lấy dữ liệu cửa hàng' });
     }
 };
 

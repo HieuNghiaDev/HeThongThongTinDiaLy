@@ -1,4 +1,5 @@
 const userModel = require('../models/userModel');
+const storeModel = require('../models/storeModel');
 
 exports.getLogin = (req, res) => {
     res.render('login', { error: null });
@@ -22,11 +23,14 @@ exports.postLogin = async (req, res) => {
 };
 
 // Trang chủ
-exports.getHome = (req, res) => {
-    if (req.session.user) {
-        res.render('home', { user: req.session.user });
-    } else {
-        res.redirect('/login');
+exports.getHome = async (req, res) => {
+    try {
+        const stores = await storeModel.getStores();
+        console.log('Dữ liệu stores:', stores); // Thêm dòng này để kiểm tra
+        res.render('home', { stores: stores });
+    } catch (error) {
+        console.error('Lỗi khi lấy dữ liệu cửa hàng:', error);
+        res.render('home', { stores: [] });
     }
 };
 
@@ -70,7 +74,8 @@ exports.postRegister = async (req, res) => {
 exports.getStores = async (req, res) => {
     try {
         const stores = await userModel.getStores();
-        res.render('stores', { stores });
+        console.log('Dữ liệu stores:', stores);
+        res.render('home', { stores });
     } catch (error) {
         console.error('Lỗi lấy dữ liệu cửa hàng:', error);
         res.status(500).render('error', { message: 'Lỗi server khi lấy dữ liệu cửa hàng' });

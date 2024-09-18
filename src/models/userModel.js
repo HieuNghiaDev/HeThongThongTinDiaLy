@@ -29,3 +29,18 @@ exports.createUser = async (username, password, fullname, email) => {
         throw error;
     }
 };
+
+//lay du lieu cua cuahang
+exports.getStores = async () => {
+    const query = 'SELECT * FROM cuahang';
+    try {
+        console.log('Bắt đầu truy vấn cửa hàng');
+        const [rows] = await db.execute(query);
+        console.log('Số lượng cửa hàng:', rows.length);
+        console.log('Kết quả kiểm tra thông tin cửa hàng:', rows);
+        return rows;
+    } catch (error) {
+        console.error('Lỗi lấy dữ liệu cửa hàng:', error);
+        throw error;
+    }
+};

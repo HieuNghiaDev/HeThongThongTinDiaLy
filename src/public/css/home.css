@@ -1,0 +1,103 @@
+.main-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #f0f8ff;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    width: 50px;
+    height: auto;
+}
+
+.site-title {
+    font-size: 1.5em;
+    color: #333;
+    margin: 0;
+    flex-grow: 1;
+    text-align: center;
+}
+
+.user-avatar {
+    position: relative;
+}
+
+.avatar-container {
+    display: inline-block;
+    cursor: pointer;
+}
+
+.avatar-img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    transition: transform 0.2s ease;
+}
+
+.avatar-container:hover .avatar-img {
+    transform: scale(1.1);
+}
+
+.user-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    padding: 10px;
+    min-width: 150px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: all 0.3s ease;
+    z-index: 1000;
+    justify-content: center;
+}
+
+.avatar-container:hover .user-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.user-name {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.logout-button {
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+    padding: 4px auto;
+    background-color: #f0f0f0;
+    color: #333;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background-color 0.2s ease;
+}
+
+.logout-button:hover {
+    background-color: red;
+}
+
+.login-link {
+    text-decoration: none;
+    color: #4CAF50;
+    font-weight: bold;
+}
+
+.login-link:hover {
+    text-decoration: underline;
+}

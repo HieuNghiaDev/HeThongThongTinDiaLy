@@ -66,3 +66,13 @@ exports.postRegister = async (req, res) => {
     }
 };
 
+//lay du lieu cua cuahang
+exports.getStores = async (req, res) => {
+    try {
+        const stores = await userModel.getStores();
+        res.render('stores', { stores });
+    } catch (error) {
+        console.error('Lỗi lấy dữ liệu cửa hàng:', error);
+        res.status(500).render('error', { message: 'Lỗi server khi lấy dữ liệu cửa hàng' });
+    }
+}

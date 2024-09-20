@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/home.css">
-    <script src="/javascript/map.js"></script>
+    <!-- <script src="/javascript/map.js"></script> -->
     <link rel="stylesheet" href="/css/map.css">
     <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <title>Home</title>
-    <script src="http://maps.google.com/maps/api/js?sensor=false"></script>
+    <scrip src="http://maps.google.com/maps/api/js?sensor=false"></script>
 </head>
 <body>
     <header class="main-header">
@@ -39,7 +39,55 @@
       
     <div id="map"></div>
 
-</body>
+    <div>
+        <h1>Cửa hàng</h1>
+        <div class="store-container">
+            <% stores.forEach(function(store) { %>
+                <div class="store-card">
+                    <h2><%= store.name %></h2>
+                    <p><%= store.address %></p>
+                    <p><%= store.latitude %></p>
+                    <p><%= store.longitude %></p>
+                </div>
+            <% }); %>
+        </div>
+    </div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script>
+        (function() {
+            window.onload = function() {
+          
+              // Creating a MapOptions object with the required properties
+              var options = {
+                zoom: 3,
+                center: new google.maps.LatLng(37.09, -95.71),
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+              };
+              
+              // Creating the map  
+              var map = new google.maps.Map(document.getElementById('map'), options);
+              
+              // Attaching click events to the buttons
+              
+              // Getting values
+              document.getElementById('getValues').onclick = function() {
+                alert('Current Zoom level is ' + map.getZoom());
+                alert('Current center is ' + map.getCenter());
+                alert('The current mapType is ' + map.getMapTypeId());
+              }
+          
+              // Changing values
+              document.getElementById('changeValues').onclick = function() {
+                map.setOptions({
+                  center: new google.maps.LatLng(40.6891, -74.0445),
+                  zoom: 17,
+                  mapTypeId: google.maps.MapTypeId.SATELLITE
+                });
+              }
+          
+            };
+          })();
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</body>    
 </html>

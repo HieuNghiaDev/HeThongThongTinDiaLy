@@ -21,13 +21,13 @@
       }
   
       // Changing values
-      document.getElementById('changeValues').onclick = function() {
-        map.setOptions({
-          center: new google.maps.LatLng(9.991177911785233,-254.80171181477513),
-          zoom: 20,
-          mapTypeId: google.maps.MapTypeId.SATELLITE
-        });
-      }
+      // document.getElementById('changeValues').onclick = function() {
+      //   map.setOptions({
+      //     center: new google.maps.LatLng(9.991177911785233,-254.80171181477513),
+      //     zoom: 20,
+      //     mapTypeId: google.maps.MapTypeId.SATELLITE
+      //   });
+      // }
   
     };
   })();

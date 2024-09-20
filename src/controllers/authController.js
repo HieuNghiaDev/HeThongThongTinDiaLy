@@ -26,11 +26,18 @@ exports.postLogin = async (req, res) => {
 exports.getHome = async (req, res) => {
     try {
         const stores = await storeModel.getStores();
-        console.log('Dữ liệu stores:', stores); // Thêm dòng này để kiểm tra
-        res.render('home', { stores: stores });
+        const user = req.session.user || null;
+
+        res.render('home', { 
+            stores: stores,
+            user: user
+        });
     } catch (error) {
         console.error('Lỗi khi lấy dữ liệu cửa hàng:', error);
-        res.render('home', { stores: [] });
+        res.render('home', { 
+            stores: [],
+            user: req.session.user
+        });
     }
 };
 

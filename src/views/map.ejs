@@ -18,8 +18,16 @@
       <div id="map"></div>
 </body>
 <script>
-    var stores = <%- typeof stores !== 'undefined' ? JSON.stringify(stores) : '[]' %>;
+    // eslint-disable-next-line
+    var stores = '<%- JSON.stringify(stores || []) %>';
     
+    document.getElementById('changeValues').onclick = function() {
+      map.setOptions({
+        center: new google.maps.LatLng(parseFloat(store.latitude),parseFloat(store.longitude)),
+        zoom: 20,
+        mapTypeId: google.maps.MapTypeId.SATELLITE
+      });
+    }
     // Sử dụng dữ liệu stores để tạo markers
     if (stores && stores.length > 0) {
         stores.forEach(function(store) {

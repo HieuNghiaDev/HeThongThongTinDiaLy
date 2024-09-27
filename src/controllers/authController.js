@@ -89,23 +89,45 @@ exports.getStores = async (req, res) => {
     }
 }
 
-//xu ly tao cua hang moi
-exports.craeteStores = async (req, res) => { 
-    const { name_store, address, latitude, longitude, phone, img, email} = req.body; // Lấy dữ liệu từ form
+// Xử lý tạo cửa hàng mới
+exports.createStores = async (req, res) => { 
+    console.log('du lieu tu form:', req.body);
+    const { name_store, address, latitude, longitude, phone, img = '/public/images/shop_img/the-gioi-di-dong-logo.png', email } = req.body; // Lấy dữ liệu từ form
 
-    if (password !== repassword) {
-        return res.render('register', { error: 'Mật khẩu và mật khẩu nhập lại không khớp' });
+    // Validate required fields
+    if (!name_store) {
+        return res.status(400).render('register', { error: 'Tên cửa hàng là bắt buộc' }); // Return error if name_store is missing
     }
+
+    // Log the received data for debugging
+    console.log('Received store data:', { name_store, address, latitude, longitude, phone, img, email });
+
+    // Set default values to null if they are undefined
+    const storeData = {
+        name_store: name_store || null,
+        address: address || null,
+        latitude: latitude || null,
+        longitude: longitude || null,
+        phone: phone || null,
+        img: img || null,
+        email: email || null
+    };
 
     try {
-        const newUser = await userModel.craeteStores(name_store, address, latitude, longitude, phone, img, email); // Tạo người dùng mới
-        // if (newUser) {
-        //     res.redirect('/login');
-        // } else {
-        //     res.render('register', { error: 'Không thể đăng ký. Vui lòng thử lại.' }); // Hiển thị thông báo lỗi
-        // }
+        const newStoreId = await storeModel.createStores(
+            storeData.name_store,
+            storeData.address,
+            storeData.latitude,
+            storeData.longitude,
+            storeData.phone,
+            storeData.img,
+            storeData.email
+        ); // Tạo cửa hàng mới
+        res.redirect('/'); // Chuyển hướng về trang chủ sau khi tạo thành công
     } catch (error) {
-        console.error('Lỗi đăng ký:', error); 
-        res.status(500).render('error', { message: 'Lỗi server khi đăng ký' });
+        console.error('Lỗi tạo cửa hàng:', error); 
+        res.status(500).render('error', { message: 'Lỗi server khi tạo cửa hàng' });
     }
-}
+};
+
+//xu ly tao cua hang moi

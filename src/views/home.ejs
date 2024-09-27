@@ -53,19 +53,19 @@
         </div>
     </div> -->
 
-    <div id="infoForm">
+    <div id="infoForm"> 
         <form action="" method="post">
-            <input type="text" id="storeName" placeholder="Tên cửa hàng">
-            <input type="text" id="storeAddress" placeholder="Địa chỉ">
-            <input type="text" id="storeLatitude" placeholder="Kinh độ" readonly>
-            <input type="text" id="storeLongitude" placeholder="Vĩ độ" readonly>
-            <input type="text" id="storePhone" placeholder="SĐT">
-            <input type="text" id="storeEmail" placeholder="Email" >
+            <input type="text" id="storeName" name="name_store" placeholder="Tên cửa hàng">
+            <input type="text" id="storeAddress" name="address" placeholder="Địa chỉ">
+            <input type="text" id="storeLatitude" name="latitude" placeholder="Kinh độ" required>
+            <input type="text" id="storeLongitude" name="longitude" placeholder="Vĩ độ" required>
+            <input type="text" id="storePhone" name="phone" placeholder="SĐT">
+            <input type="text" id="storeEmail" name="email" placeholder="Email" >
             <input type="file" id="storeImageInput" accept="image/*">
             <img id="storeImage" src="" alt="Store Image" style="display:none; width: 100px; height: auto;">
             
             <button id="editButton">Sửa</button>
-            <button id="addButton">Thêm</button>
+            <button id="addButton" type="submit">Thêm</button>
         </form>
     </div>
 
@@ -81,6 +81,7 @@
             var map = new google.maps.Map(document.getElementById('map'), options);
 
             var markersArray = [];
+            var currentInfowindow = null; // Biến để lưu infowindow hiện tại
             
             <% stores.forEach(function(store) { %>
                 var marker = new google.maps.Marker({
@@ -90,8 +91,22 @@
                 });
                 
                 var infowindow = new google.maps.InfoWindow({
-                    content: '<h3><%= store.name_store %></h3><p><%= store.address %></p>'
+                    content: '<h3><%= store.name_store %>' +
+                    '</h3><p><%= store.address %></p>' + '<img src="<%= store.img %>" alt="loi anh">'
                 });
+
+                // Thêm sự kiện click cho marker
+                google.maps.event.addListener(marker, 'click', (function(marker, infowindow) {
+                    return function() {
+                        // Đóng infowindow hiện tại nếu có
+                        if (currentInfowindow && currentInfowindow !== infowindow) {
+                            currentInfowindow.close();
+                        }
+                        // Mở infowindow mới
+                        infowindow.open(map, marker);
+                        currentInfowindow = infowindow; // Cập nhật infowindow hiện tại
+                    };
+                })(marker, infowindow));
                 
                 // Store the marker and infowindow in the array
                 markersArray.push({marker: marker, infowindow: infowindow});

@@ -10,15 +10,6 @@
       
       // Creating the map  
       var map = new google.maps.Map(document.getElementById('map'), options);
-      
-      // Attaching click events to the buttons
-      
-      // Getting values
-      document.getElementById('getValues').onclick = function() {
-        alert('Current Zoom level is ' + map.getZoom());
-        alert('Current center is ' + map.getCenter());
-        alert('The current mapType is ' + map.getMapTypeId());
-      }
   
     };
   })();

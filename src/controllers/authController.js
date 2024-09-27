@@ -24,9 +24,14 @@ exports.postLogin = async (req, res) => {
 
 // Trang chủ
 exports.getHome = async (req, res) => {
+    // Kiểm tra xem người dùng đã đăng nhập hay chưa
+    if (!req.session.user) {
+        return res.redirect('/login');
+    }
+
     try {
         const stores = await storeModel.getStores();
-        const user = req.session.user || null;
+        const user = req.session.user;
 
         res.render('home', { 
             stores: stores,
@@ -77,6 +82,12 @@ exports.postRegister = async (req, res) => {
     }
 };
 
+exports.getAddStores = async (req, res) => { // Đánh dấu là async
+    const user = req.session.user; // Lấy thông tin người dùng
+    const stores = await storeModel.getStores(); // Lấy danh sách cửa hàng
+    res.render('add-stores', { user, stores }); // Chuyển dữ liệu sang view
+};
+
 //lay du lieu cua cuahang
 exports.getStores = async (req, res) => {
     try {
@@ -92,11 +103,11 @@ exports.getStores = async (req, res) => {
 // Xử lý tạo cửa hàng mới
 exports.createStores = async (req, res) => { 
     console.log('du lieu tu form:', req.body);
-    const { name_store, address, latitude, longitude, phone, img = '/public/images/shop_img/the-gioi-di-dong-logo.png', email } = req.body; // Lấy dữ liệu từ form
+    const { name_store, address, latitude, longitude, phone, img = '/images/shop_img/the-gioi-di-dong-logo.png', email } = req.body; // Lấy dữ liệu từ form
 
     // Validate required fields
     if (!name_store) {
-        return res.status(400).render('register', { error: 'Tên cửa hàng là bắt buộc' }); // Return error if name_store is missing
+        return res.status(400).render('add-stores', { error: 'Tên cửa hàng là bắt buộc' });
     }
 
     // Log the received data for debugging

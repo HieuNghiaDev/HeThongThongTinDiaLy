@@ -102,6 +102,66 @@
     text-decoration: underline;
 }
 
+.menu-container {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 20px; 
+    background-color: #669dcd;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1); 
+    border-radius: 5px; 
+    margin: 10px 0px;
+}
+
+.menu {
+    display: flex;
+    gap: 20px;
+    
+}
+
+.menu-item {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+.menu-item:hover {
+    color: #007bff;
+}
+
+.search-container {
+    display: flex;
+    align-items: center;
+}
+
+.search-input {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 200px;
+    transition: border-color 0.3s;
+}
+
+.search-input:focus {
+    border-color: #007bff; /* Màu viền khi focus */
+    outline: none; /* Bỏ outline mặc định */
+}
+
+.search-button {
+    padding: 8px 12px; /* Tăng padding */
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-left: 10px; /* Khoảng cách giữa input và button */
+    transition: background-color 0.3s; /* Hiệu ứng chuyển màu */
+}
+
+.search-button:hover {
+    background-color: #0056b3; /* Màu khi hover */
+}
+
 #infoForm {
     margin: 20px;
     padding: 10px;
@@ -129,5 +189,32 @@
 }
 
 #infoForm button:hover {
+    background-color: #0056b3;
+}
+
+img {
+    width: 260px;
+    height: 120px;
+    object-fit: cover;
+}
+
+.stat-button {
+    background-color: #007bff;
+}
+
+.delete-button {
+    background-color: red;
+}
+
+.stat-button, .delete-button {
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+    margin: 5px;
+}
+
+.stat-button:hover, .delete-button:hover {
     background-color: #0056b3;
 }

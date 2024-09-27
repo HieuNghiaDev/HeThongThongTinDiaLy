@@ -5,7 +5,8 @@ const authController = require('../controllers/authController');
 router.get('/login', authController.getLogin);
 router.post('/login', authController.postLogin);
 router.get('/', [authController.getHome, authController.getStores]);
-router.post('/', authController.createStores)
+router.get('/add-store', authController.getAddStores)
+router.post('/add-store', authController.createStores)
 router.get('/logout', authController.logout);
 router.get('/register', authController.getRegister);
 router.post('/register', authController.postRegister);

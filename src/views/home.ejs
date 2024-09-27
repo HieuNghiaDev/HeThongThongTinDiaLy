@@ -32,14 +32,14 @@
       </div>
     </header>
 
-    <div class="input-button-value">
+    <!-- <div class="input-button-value">
         <input type="button" id="getValues" value="getValues">
         <input type="button" id="changeValues" value="changeValues">
-    </div>
-      
-    <div id="map"></div>
+    </div> -->
 
-    <div>
+    <div id="map"></div> <!-- Đảm bảo rằng bạn có một div cho bản đồ -->
+
+    <!-- <div>
         <h1>Cửa hàng</h1>
         <div class="store-container">
             <% stores.forEach(function(store) { %>
@@ -51,22 +51,35 @@
                 </div>
             <% }); %>
         </div>
+    </div> -->
+
+    <div id="infoForm">
+        <form action="" method="post">
+            <input type="text" id="storeName" placeholder="Tên cửa hàng">
+            <input type="text" id="storeAddress" placeholder="Địa chỉ">
+            <input type="text" id="storeLatitude" placeholder="Kinh độ" readonly>
+            <input type="text" id="storeLongitude" placeholder="Vĩ độ" readonly>
+            <input type="text" id="storePhone" placeholder="SĐT">
+            <input type="text" id="storeEmail" placeholder="Email" >
+            <input type="file" id="storeImageInput" accept="image/*">
+            <img id="storeImage" src="" alt="Store Image" style="display:none; width: 100px; height: auto;">
+            
+            <button id="editButton">Sửa</button>
+            <button id="addButton">Thêm</button>
+        </form>
     </div>
 
   <script>
     (function() {
         window.onload = function() {
-            // Creating an object literal containing the properties we want to pass to the map  
+            // Khởi tạo bản đồ
             var options = {
                 zoom: 12,
                 center: new google.maps.LatLng(9.9997671, 105.0932218),
                 mapTypeId: google.maps.MapTypeId.ROADMAP
             };
-        
-            // Creating the map  
             var map = new google.maps.Map(document.getElementById('map'), options);
-            
-            // Array to store all markers and infowindows
+
             var markersArray = [];
             
             <% stores.forEach(function(store) { %>
@@ -83,24 +96,29 @@
                 // Store the marker and infowindow in the array
                 markersArray.push({marker: marker, infowindow: infowindow});
             <% }); %>
+            
+            // Thêm sự kiện click cho bản đồ
+            google.maps.event.addListener(map, 'click', function(event) {
+                // Lấy tọa độ click
+                var lat = event.latLng.lat();
+                var lng = event.latLng.lng();
 
-            // Add click listeners to all markers
-            markersArray.forEach(function(markerObj) {
-                google.maps.event.addListener(markerObj.marker, 'click', function() {
-                    // Close all open infowindows
-                    markersArray.forEach(function(obj) {
-                        obj.infowindow.close();
-                    });
-                    // Open this marker's infowindow
-                    markerObj.infowindow.open(map, markerObj.marker);
-                });
-            });
+                // Cập nhật thông tin vào form
+                document.getElementById('storeLatitude').value = lat;
+                document.getElementById('storeLongitude').value = lng;
 
-            // Add a click event to the map to close all infowindows
-            google.maps.event.addListener(map, 'click', function() {
-                markersArray.forEach(function(obj) {
-                    obj.infowindow.close();
+                // Tùy chọn: Tạo marker mới tại vị trí click
+                var newMarker = new google.maps.Marker({
+                    position: event.latLng,
+                    map: map,
+                    title: ''
                 });
+
+                // Tùy chọn: Mở infowindow cho marker mới
+                var infowindow = new google.maps.InfoWindow({
+                    content: '<h3>Bạn muốn thêm 1 marker tại đây ?</h3><p>Latitude: ' + lat + '<br>Longitude: ' + lng + '</p>'
+                });
+                infowindow.open(map, newMarker);
             });
         };
     })();

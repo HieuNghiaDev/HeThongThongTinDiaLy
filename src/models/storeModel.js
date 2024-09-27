@@ -12,14 +12,15 @@ exports.getStores = async () => {
     }
 };
 
-exports.createStore = async (name_store, address, latitude, longitude) => {
-    const query = 'INSERT INTO cuahang (name_store, address, latitude, longitude) VALUES (?, ?, ?, ?)';
+exports.craeteStores = async () => {
+    const query = 'INSERT INTO cuahang (name_store, address, latitude, longitude, phone, img, email) VALUES (?, ?, ?, ?, ?, ?, ?)';
+
     try {
-        const [result] = await db.execute(query, [name_store, address, latitude, longitude]);
-        console.log('Cửa hàng mới đã được tạo:', result.insertId);
+        const [result] = await db.execute(query, [name_store, address, latitude, longitude, phone, img, email]);
+        console.log('Cua Hang moi da duoc tao', result.insertId);
         return result.insertId;
     } catch (error) {
-        console.error('Lỗi tạo cửa hàng mới:', error);
-        throw error;    
+        console.error('Lỗi tạo người dùng mới:', error);
+        throw error;
     }
-};
+}

@@ -88,3 +88,24 @@ exports.getStores = async (req, res) => {
         res.status(500).render('error', { message: 'Lỗi server khi lấy dữ liệu cửa hàng' });
     }
 }
+
+//xu ly tao cua hang moi
+exports.craeteStores = async (req, res) => { 
+    const { name_store, address, latitude, longitude, phone, img, email} = req.body; // Lấy dữ liệu từ form
+
+    if (password !== repassword) {
+        return res.render('register', { error: 'Mật khẩu và mật khẩu nhập lại không khớp' });
+    }
+
+    try {
+        const newUser = await userModel.craeteStores(name_store, address, latitude, longitude, phone, img, email); // Tạo người dùng mới
+        // if (newUser) {
+        //     res.redirect('/login');
+        // } else {
+        //     res.render('register', { error: 'Không thể đăng ký. Vui lòng thử lại.' }); // Hiển thị thông báo lỗi
+        // }
+    } catch (error) {
+        console.error('Lỗi đăng ký:', error); 
+        res.status(500).render('error', { message: 'Lỗi server khi đăng ký' });
+    }
+}

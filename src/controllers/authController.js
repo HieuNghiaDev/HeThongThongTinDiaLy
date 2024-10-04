@@ -141,4 +141,22 @@ exports.createStores = async (req, res) => {
     }
 };
 
-//xu ly tao cua hang moi
+// Xử lý tìm kiếm
+exports.searchStores = async (req, res) => {
+    const query = req.query.query;
+    try {
+        const stores = await storeModel.searchStores(query); 
+        const user = req.session.user;
+
+        res.render('home', { 
+            stores: stores,
+            user: user
+        });
+    } catch (error) {
+        console.error('Lỗi khi tìm kiếm cửa hàng:', error);
+        res.render('home', { 
+            stores: [],
+            user: req.session.user
+        });
+    }
+};

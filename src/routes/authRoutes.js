@@ -10,5 +10,6 @@ router.post('/add-store', authController.createStores)
 router.get('/logout', authController.logout);
 router.get('/register', authController.getRegister);
 router.post('/register', authController.postRegister);
+router.get('/search', authController.searchStores);
 
 module.exports = router;

@@ -69,6 +69,10 @@
         </div>
     </div>
 
+    <script type="application/json" id="store-data">
+        <%= JSON.stringify(stores) %>
+    </script>
+    
   <script>
     (function() {
         window.onload = function() {
@@ -85,7 +89,7 @@
             var markersArray = [];
             var currentInfowindow = null; // Biến để lưu infowindow hiện tại
             
-            <% stores.forEach(function(store) { %>
+            <% stores.forEach(function(store) { %>  
                 var marker = new google.maps.Marker({
                     position: new google.maps.LatLng(<%= store.latitude %>, <%= store.longitude %>),
                     map: map,
@@ -122,12 +126,6 @@
                 document.getElementById('storeLatitude').value = lat;
                 document.getElementById('storeLongitude').value = lng;
 
-                // Tùy chọn: Tạo marker mới tại vị trí click
-                var newMarker = new google.maps.Marker({
-                    position: event.latLng,
-                    map: map,
-                    title: ''
-                });
 
                 // Tùy chọn: Mở infowindow cho marker mới
                 var infowindow = new google.maps.InfoWindow({

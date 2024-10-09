@@ -207,12 +207,11 @@ img {
 }
 
 .stat-button, .delete-button {
-    color: white;
-    border: none;
-    border-radius: 5px;
-    padding: 5px 10px;
-    cursor: pointer;
-    margin: 5px;
+    flex: 0 1 120px; /* Đặt chiều rộng tối thiểu cho các nút */
+    padding: 10px; /* Tăng padding để nút to hơn */
+    margin: 0 5px; /* Khoảng cách giữa các nút */
+    font-size: 16px; /* Tăng kích thước chữ */
+    border-radius: 5px; /* Bo góc cho nút */
 }
 
 .stat-button:hover, .delete-button:hover {
@@ -220,8 +219,9 @@ img {
 }
 
 .navigation-buttons {
-    display: flex;
-    gap: 10px; /* Space between buttons */
+    display: flex; /* Đặt chế độ hiển thị là flex */
+    justify-content: center; /* Căn giữa các nút */
+    margin-top: 10px; /* Khoảng cách giữa ảnh và các nút */
 }
 
 .nav-button {
@@ -235,4 +235,77 @@ img {
 
 .nav-button:hover {
     background-color: #0056b3;
+}
+
+#statisticForm {
+    display: none; /* Ẩn form ban đầu */
+    position: absolute; /* Đặt vị trí tuyệt đối */
+    bottom: 20px; /* Khoảng cách từ đáy */
+    left: 20px; /* Khoảng cách từ bên trái */
+    background-color: #ffffff; /* Nền trắng để dễ nhìn */
+    padding: 20px; /* Tăng padding cho form */
+    border-radius: 10px; /* Bo góc cho form */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* Đổ bóng cho form */
+    z-index: 1000; /* Đặt độ ưu tiên cao hơn */
+    transition: all 0.3s ease; /* Hiệu ứng chuyển động */
+    width: 300px; /* Chiều rộng của form */
+}
+
+.close-button {
+    position: absolute; /* Đặt vị trí tuyệt đối */
+    top: 10px; /* Khoảng cách từ trên */
+    right: 10px; /* Khoảng cách từ bên phải */
+    background: none; /* Không có nền */
+    border: none; /* Không có viền */
+    font-size: 24px; /* Kích thước chữ lớn hơn */
+    cursor: pointer; /* Con trỏ chuột khi hover */
+    color: #ff4d4d; /* Màu chữ đỏ */
+    z-index: 1001; /* Đặt độ ưu tiên cao hơn để nút luôn nằm trên cùng */
+}
+
+.close-button:hover {
+    color: #ff1a1a; /* Màu khi hover */
+}
+
+h3 {
+    margin: 0; /* Bỏ margin để nút không bị đẩy xuống */
+    padding: 10px 0; /* Thêm padding cho tiêu đề */
+    font-size: 1.8em; /* Kích thước chữ tiêu đề */
+    color: #007bff; /* Màu chữ tiêu đề */
+    text-align: center; /* Căn giữa tiêu đề */
+    border-bottom: 1px solid #ccc; /* Đường viền dưới tiêu đề */
+}
+
+label {
+    font-weight: bold; /* Chữ đậm cho label */
+    margin-top: 10px; /* Khoảng cách trên label */
+}
+
+input[type="date"] {
+    width: 100%; /* Chiều rộng 100% */
+    padding: 10px; /* Padding cho input */
+    border: 1px solid #ccc; /* Viền xám */
+    border-radius: 4px; /* Bo góc cho input */
+    margin-bottom: 15px; /* Khoảng cách dưới input */
+    transition: border-color 0.3s; /* Hiệu ứng chuyển màu viền */
+}
+
+input[type="date"]:focus {
+    border-color: #007bff; /* Màu viền khi focus */
+    outline: none; /* Bỏ outline mặc định */
+}
+
+button {
+    width: 100%; /* Chiều rộng 100% cho nút */
+    padding: 10px; /* Padding cho nút */
+    background-color: #007bff; /* Màu nền nút */
+    color: white; /* Màu chữ nút */
+    border: none; /* Không có viền */
+    border-radius: 4px; /* Bo góc cho nút */
+    cursor: pointer; /* Con trỏ chuột khi hover */
+    transition: background-color 0.3s; /* Hiệu ứng chuyển màu */
+}
+
+button:hover {
+    background-color: #0056b3; /* Màu khi hover */
 }

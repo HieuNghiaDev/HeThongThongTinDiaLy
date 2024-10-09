@@ -29,10 +29,10 @@ exports.createStores = async (name_store, address, latitude, longitude, phone, i
 exports.searchStores = async (query) => {
     const sql = 'SELECT * FROM cuahang WHERE name_store LIKE ? OR address LIKE ?';
     const searchQuery = `%${query.trim()}%`;
-    console.log('Searching for:', searchQuery); // Ghi log giá trị tìm kiếm
+    console.log('Searching for:', searchQuery);
     try {
         const [rows] = await db.execute(sql, [searchQuery, searchQuery]);
-        console.log('Results:', rows); // Ghi log kết quả
+        console.log('Results:', rows);
         return rows;
     } catch (error) {
         console.error('Lỗi khi tìm kiếm cửa hàng:', error);

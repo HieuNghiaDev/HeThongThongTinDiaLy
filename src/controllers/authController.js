@@ -160,3 +160,37 @@ exports.searchStores = async (req, res) => {
         });
     }
 };
+
+// Thống kê cửa hàng
+exports.statisticalShop = async (req, res) => {
+    const storeId = req.query.id; // Get the store ID from the query parameters
+    try {
+        const store = await storeModel.getStoreById(storeId); // Fetch the store data by ID
+        const user = req.session.user;
+
+        if (!store) {
+            // If the store is not found, render an error page or redirect
+            return res.status(404).render('error', { message: 'Cửa hàng không tồn tại' });
+        }
+
+        res.render('statistical_shop', { 
+            store: store,
+            user: user
+        });
+    } catch (error) {
+        console.error('Lỗi khi lấy dữ liệu cửa hàng:', error);
+        res.render('error', { message: 'Lỗi server khi lấy dữ liệu cửa hàng' });
+    }
+};
+
+// Xử lý xóa cửa hàng
+exports.deleteStore = async (req, res) => {
+    const { storeId } = req.body;
+    try {
+        await storeModel.deleteStore(storeId); 
+        res.redirect('/');
+    } catch (error) {
+        console.error('Lỗi xóa cửa hàng:', error);
+        res.status(500).render('error', { message: 'Lỗi server khi xóa cửa hàng' });
+    }
+};

@@ -13,6 +13,7 @@
     <script src="http://maps.google.com/maps/api/js?sensor=false"></script>
 </head>
 <body>
+    <div id="loading-spinner" class="loading-spinner"></div>
     <header class="main-header">
         <div class="logo-container">
             <img src="https://cdn.haitrieu.com/wp-content/uploads/2021/11/Logo-DH-Kien-Giang-VNKGU.png" alt="Logo" class="logo">
@@ -53,7 +54,7 @@
     <div class="container">
         <div id="map"></div> 
         <div id="infoForm"> 
-            <form action="" method="post">
+            <form action="abc" method="post">
                 <input type="text" id="storeName" name="name_store" placeholder="Tên cửa hàng">
                 <input type="text" id="storeAddress" name="address" placeholder="Địa chỉ">
                 <input type="text" id="storeLatitude" name="latitude" placeholder="Kinh độ" required>
@@ -137,6 +138,17 @@
     })();
 </script>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var spinner = document.getElementById('loading-spinner');
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                spinner.style.display = 'none';
+            }, 750);
+        });
+    });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>    
 </html>

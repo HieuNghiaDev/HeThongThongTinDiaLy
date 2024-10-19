@@ -24,7 +24,6 @@ exports.postLogin = async (req, res) => {
 
 // Trang chủ
 exports.getHome = async (req, res) => {
-    // Kiểm tra xem người dùng đã đăng nhập hay chưa
     if (!req.session.user) {
         return res.redirect('/login');
     }
@@ -82,10 +81,10 @@ exports.postRegister = async (req, res) => {
     }
 };
 
-exports.getAddStores = async (req, res) => { // Đánh dấu là async
-    const user = req.session.user; // Lấy thông tin người dùng
-    const stores = await storeModel.getStores(); // Lấy danh sách cửa hàng
-    res.render('add-stores', { user, stores }); // Chuyển dữ liệu sang view
+exports.getAddStores = async (req, res) => {
+    const user = req.session.user;
+    const stores = await storeModel.getStores();
+    res.render('add-stores', { user, stores });
 };
 
 //lay du lieu cua cuahang
@@ -105,15 +104,12 @@ exports.createStores = async (req, res) => {
     console.log('du lieu tu form:', req.body);
     const { name_store, address, latitude, longitude, phone, img = '/images/shop_img/the-gioi-di-dong-logo.png', email } = req.body; // Lấy dữ liệu từ form
 
-    // Validate required fields
-    if (!name_store) {
-        return res.status(400).render('add-stores', { error: 'Tên cửa hàng là bắt buộc' });
-    }
+    // if (!name_store) {
+    //     return res.status(400).render('add-stores', { error: 'Tên cửa hàng là bắt buộc' });
+    // }
 
-    // Log the received data for debugging
     console.log('Received store data:', { name_store, address, latitude, longitude, phone, img, email });
 
-    // Set default values to null if they are undefined
     const storeData = {
         name_store: name_store || null,
         address: address || null,
@@ -133,8 +129,9 @@ exports.createStores = async (req, res) => {
             storeData.phone,
             storeData.img,
             storeData.email
-        ); // Tạo cửa hàng mới
-        res.redirect('/'); // Chuyển hướng về trang chủ sau khi tạo thành công
+        ); 
+        res.redirect('/');
+        
     } catch (error) {
         console.error('Lỗi tạo cửa hàng:', error); 
         res.status(500).render('error', { message: 'Lỗi server khi tạo cửa hàng' });
@@ -161,20 +158,21 @@ exports.searchStores = async (req, res) => {
     }
 };
 
-// Thống kê cửa hàng
+// Thống kê chi tiết cho cửa hàng
 exports.statisticalShop = async (req, res) => {
-    const storeId = req.query.id; // Get the store ID from the query parameters
+    const storeId = req.query.id; 
     try {
-        const store = await storeModel.getStoreById(storeId); // Fetch the store data by ID
+        const store = await storeModel.getStoreById(storeId);
+        const salesData = await storeModel.getSalesDetails(storeId);
         const user = req.session.user;
 
         if (!store) {
-            // If the store is not found, render an error page or redirect
             return res.status(404).render('error', { message: 'Cửa hàng không tồn tại' });
         }
 
         res.render('statistical_shop', { 
             store: store,
+            salesData: salesData,
             user: user
         });
     } catch (error) {

@@ -49,7 +49,6 @@
     <script>
         (function() {
             window.onload = function() {
-                // Khởi tạo bản đồ
                 var options = {
                     zoom: 12,
                     center: new google.maps.LatLng(9.9997671, 105.0932218),
@@ -57,10 +56,8 @@
                 };
                 var map = new google.maps.Map(document.getElementById('map'), options);
     
-                // Disable map interactions if user is not logged in
-    
                 var markersArray = [];
-                var currentInfowindow = null; // Biến để lưu infowindow hiện tại
+                var currentInfowindow = null;
                 
                 <% stores.forEach(function(store) { %>  
                     var marker = new google.maps.Marker({
@@ -73,8 +70,8 @@
                         content: '<img src="<%= store.img %>" alt="loi anh">' + 
                                  '<h3><%= store.name_store %></h3>' +
                                  '<p><%= store.address %></p>' +
-                                 '<a href="/statistical_shop?id=<%= store.id %>" class="btn btn-info">Thống kê</a>' + // Statistics button
-                                 '<form action="/delete-store" method="POST" style="display:inline;">' + // Delete button
+                                 '<a href="/statistical_shop?id=<%= store.id %>" class="btn btn-info">Thống kê</a>' +
+                                 '<form action="/delete-store" method="POST" style="display:inline;">' + 
                                      '<input type="hidden" name="storeId" value="<%= store.id %>">' +
                                      '<button type="submit" class="btn btn-danger">Xóa</button>' +
                                  '</form>' +

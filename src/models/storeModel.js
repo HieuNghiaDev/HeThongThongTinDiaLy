@@ -64,3 +64,31 @@ exports.getStoreById = async (storeId) => {
         throw error;
     }
 };
+
+// Lấy dữ liệu bán hàng cho cửa hàng
+exports.getSalesDetails = async (storeId) => {
+    const query = `
+        SELECT 
+            d.id AS STT,
+            c.name_store AS Ten_cua_hang,
+            sp.tensp AS Ten_san_pham,
+            dm.ten_dmuc AS Loai,
+            sp.gia AS Gia_tien,
+            ct.so_luong AS So_luong_ban,
+            d.ngay_tao AS Ngay_ban,
+            (ct.so_luong * sp.gia) AS Tong_tien 
+        FROM donhang d
+        JOIN cuahang c ON d.id_shop = c.id
+        JOIN chitietdonhang ct ON d.id = ct.id_dh
+        JOIN sanpham sp ON ct.id_sp = sp.id
+        JOIN doanhmuc dm ON sp.id_dmuc = dm.id
+        WHERE d.id_shop = ?; 
+    `;
+    try {
+        const [rows] = await db.execute(query, [storeId]);
+        return rows;
+    } catch (error) {
+        console.error('Lỗi khi lấy dữ liệu bán hàng:', error);
+        throw error;
+    }
+};

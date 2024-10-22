@@ -9,11 +9,10 @@ exports.getLogin = (req, res) => {
 exports.postLogin = async (req, res) => {
     const { username, password } = req.body;
     try {
-        const user = await userModel.authenticateUser(username, password); // Kiểm tra thông tin đăng nhập
+        const user = await userModel.authenticateUser(username, password);
         if (user) {
             req.session.user = user;
-            res.redirect('/'); // Chuyển hướng đến trang chủ sau khi đăng nhập thành công
-        } else {
+            res.redirect('/'); 
             res.render('login', { error: 'Tên đăng nhập hoặc mật khẩu không đúng' });
         }
     } catch (error) {
@@ -158,26 +157,32 @@ exports.searchStores = async (req, res) => {
     }
 };
 
-// Thống kê chi tiết cho cửa hàng
 exports.statisticalShop = async (req, res) => {
-    const storeId = req.query.id; 
+    const storeId = req.query.id;
+    const { startDate, endDate, productType } = req.query;
+
+    if (!storeId) {
+        return res.status(400).render('error', { message: 'ID cửa hàng (storeId) là bắt buộc.' });
+    }
+
     try {
         const store = await storeModel.getStoreById(storeId);
-        const salesData = await storeModel.getSalesDetails(storeId);
-        const user = req.session.user;
-
         if (!store) {
-            return res.status(404).render('error', { message: 'Cửa hàng không tồn tại' });
+            return res.status(404).render('error', { message: 'Cửa hàng không tồn tại.' });
         }
 
-        res.render('statistical_shop', { 
+        const salesData = await storeModel.getSalesDetails(storeId, startDate, endDate, productType);
+        const user = req.session.user;
+
+        // Chỉ render một lần
+        return res.render('statistical_shop', { 
             store: store,
             salesData: salesData,
             user: user
         });
     } catch (error) {
         console.error('Lỗi khi lấy dữ liệu cửa hàng:', error);
-        res.render('error', { message: 'Lỗi server khi lấy dữ liệu cửa hàng' });
+        return res.status(500).render('error', { message: 'Lỗi server khi lấy dữ liệu cửa hàng.' });
     }
 };
 

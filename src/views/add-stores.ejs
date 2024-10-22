@@ -77,7 +77,6 @@
   <script>
     (function() {
         window.onload = function() {
-            // Khởi tạo bản đồ
             var options = {
                 zoom: 12,
                 center: new google.maps.LatLng(9.9997671, 105.0932218),
@@ -85,10 +84,8 @@
             };
             var map = new google.maps.Map(document.getElementById('map'), options);
 
-            // Disable map interactions if user is not logged in
-
             var markersArray = [];
-            var currentInfowindow = null; // Biến để lưu infowindow hiện tại
+            var currentInfowindow = null;
             
             <% stores.forEach(function(store) { %>  
                 var marker = new google.maps.Marker({
@@ -102,7 +99,6 @@
                     '</h3><p><%= store.address %></p>'
                 });
 
-                // Thêm sự kiện click cho marker
                 google.maps.event.addListener(marker, 'click', (function(marker, infowindow) {
                     return function() {
                         if (currentInfowindow && currentInfowindow !== infowindow) {
@@ -112,23 +108,20 @@
                         currentInfowindow = infowindow;
                     };
                 })(marker, infowindow));
-                
-                // Store the marker and infowindow in the array
+
                 markersArray.push({marker: marker, infowindow: infowindow});
             <% }); %>
-            
-            // Thêm sự kiện click cho bản đồ
+
             google.maps.event.addListener(map, 'click', function(event) {
-                // Lấy tọa độ click
                 var lat = event.latLng.lat();
                 var lng = event.latLng.lng();
 
-                // Cập nhật thông tin vào form
+                //lat = document.getElementById('storeLatitude').value;
+                //lng = document.getElementById('storeLongitude').value;
+
                 document.getElementById('storeLatitude').value = lat;
                 document.getElementById('storeLongitude').value = lng;
 
-
-                // Tùy chọn: Mở infowindow cho marker mới
                 var infowindow = new google.maps.InfoWindow({
                     content: '<h3>Bạn muốn thêm 1 marker tại đây ?</h3><p>Latitude: ' + lat + '<br>Longitude: ' + lng + '</p>'
                 });

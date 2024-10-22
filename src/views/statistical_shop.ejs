@@ -46,6 +46,25 @@
 
     <h1>Thống kê cho cửa hàng: <%= store.name_store %></h1>
 
+    <form method="GET" action="/statistical_shop">
+        <input type="hidden" name="id" value="<%= store.id %>">
+        <label for="startDate">Từ ngày:</label>
+        <input type="date" id="startDate" name="startDate" required>
+        
+        <label for="endDate">Đến ngày:</label>
+        <input type="date" id="endDate" name="endDate" required>
+    
+        <label for="productType">Loại sản phẩm:</label>
+        <select id="productType" name="productType">
+            <option value="">Tất cả</option>
+            <option value="1">Máy Tính Xách tay</option>
+            <option value="2">Điện Thoại Di Động</option>
+            <option value="3">Phụ Kiện</option>
+        </select>
+        
+        <button type="submit">Lọc</button>
+    </form>
+
     <table>
         <thead>
             <tr>

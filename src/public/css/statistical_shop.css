@@ -1,44 +1,166 @@
-/* CSS cho bảng thống kê */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 20px;
+}
+
+.main-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.statistics-container {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+}
+
+.statistic-box {
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    width: 30%;
+    text-align: center;
+}
+
+.statistic-box h2 {
+    margin: 0 0 10px;
+}
+
+.percentage {
+    color: green;
+}
+
+.filter-form {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+.filter-form label {
+    margin-right: 10px;
+}
+
+.filter-form input[type="date"],
+.filter-form select {
+    margin-right: 10px;
+    padding: 8px;
+}
+
+.filter-form button {
+    padding: 8px 15px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.filter-form button:hover {
+    background-color: #45a049;
+}
+
 table {
     width: 100%;
-    border-collapse: collapse; /* Gộp các đường viền */
-    margin-top: 20px; /* Khoảng cách trên bảng */
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Đổ bóng cho bảng */
-    border-radius: 8px; /* Bo góc cho bảng */
-    overflow: hidden; /* Ẩn các góc bị cắt */
+    border-collapse: collapse;
+    margin-top: 20px;
 }
 
 th, td {
-    padding: 12px; /* Khoảng cách bên trong ô */
-    text-align: left; /* Căn trái nội dung */
-    border: 1px solid #ddd; /* Đường viền cho ô */
+    padding: 12px;
+    text-align: left;
+    border: 1px solid #ddd;
 }
 
 th {
-    background-color: #4CAF50; /* Màu nền cho tiêu đề */
-    color: white; /* Màu chữ tiêu đề */
-    font-weight: bold; /* Đậm chữ tiêu đề */
+    background-color: #4CAF50;
+    color: white;
 }
 
 tr:nth-child(even) {
-    background-color: #f9f9f9; /* Màu nền cho hàng chẵn */
+    background-color: #f9f9f9;
 }
 
 tr:hover {
-    background-color: #e0f7fa; /* Màu nền khi di chuột qua hàng */
-    transition: background-color 0.3s; /* Hiệu ứng chuyển màu */
+    background-color: #e0f7fa;
 }
 
 .store-details {
-    margin-bottom: 20px; /* Khoảng cách dưới thông tin cửa hàng */
-    padding: 15px; /* Khoảng cách bên trong */
-    background-color: #f9f9f9; /* Màu nền cho thông tin cửa hàng */
-    border-radius: 8px; /* Bo góc cho thông tin cửa hàng */
-    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1); /* Đổ bóng cho thông tin cửa hàng */
+    margin-bottom: 20px;
+    padding: 15px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
 }
 
 .store-details p {
-    margin: 5px 0; /* Khoảng cách giữa các đoạn */
-    font-size: 16px; /* Kích thước chữ */
-    color: #333; /* Màu chữ */
+    margin: 5px 0;
+    font-size: 16px;
+    color: #333;
+}
+
+/* Updated styles for a more professional horizontal form layout */
+form {
+    display: flex; /* Use flexbox for layout */
+    flex-wrap: wrap; /* Allow wrapping for smaller screens */
+    margin: 15px 0; /* Reduced margin */
+    padding: 15px; /* Increased padding for better spacing */
+    background-color: #ffffff; /* White background for a clean look */
+    border-radius: 8px; /* Slightly larger border radius */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Softer shadow */
+    align-items: center; /* Center align items vertically */
+}
+
+form label {
+    flex: 1; /* Allow labels to take equal space */
+    margin-right: 10px; /* Space between label and input */
+    font-weight: bold;
+    font-size: 14px; /* Consistent font size */
+    color: #333; /* Darker text color for better readability */
+    text-align: right; /* Align text to the right */
+}
+
+form input[type="date"],
+form select {
+    flex: 2; /* Allow inputs and selects to take more space */
+    padding: 10px; /* Increased padding for comfort */
+    margin-right: 10px; /* Space between inputs */
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px; /* Consistent font size */
+    transition: border-color 0.3s; /* Smooth transition for focus */
+}
+
+form input[type="date"]:focus,
+form select:focus {
+    border-color: #4CAF50; /* Change border color on focus */
+    outline: none; /* Remove default outline */
+}
+
+form button {
+    flex: 0 0 auto; /* Button does not grow */
+    background-color: #4CAF50; 
+    color: white;
+    padding: 10px 15px; /* Increased padding for better click area */
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px; /* Consistent font size */
+    transition: background-color 0.3s; /* Smooth transition for hover */
+}
+
+form button:hover {
+    background-color: #45a049; /* Darker shade on hover */
+}
+
+.charts-container {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+
+canvas {
+    max-width: 100%; /* Ensure responsiveness */
 }

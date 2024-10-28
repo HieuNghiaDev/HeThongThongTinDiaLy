@@ -58,7 +58,7 @@ exports.getStoreById = async (storeId) => {
     const query = 'SELECT * FROM cuahang WHERE id = ?';
     try {
         const [rows] = await db.execute(query, [storeId]);
-        return rows[0]; // Return the first row (the store)
+        return rows[0];
     } catch (error) {
         console.error('Lỗi khi lấy dữ liệu cửa hàng theo ID:', error);
         throw error;
